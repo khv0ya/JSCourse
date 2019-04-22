@@ -1,0 +1,22 @@
+{
+  "name": "jscourse",
+  "version": "1.0.0",
+  "description": "some description",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khv0ya/JSCourse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khv0ya/JSCourse/issues"
+  },
+  "homepage": "https://github.com/khv0ya/JSCourse#readme",
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
+}
