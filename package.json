@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "test:rates": "mocha ./test/exchangeRateApi.spec.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

@@ -1,9 +1,8 @@
 const { describe, it } = require('mocha');
 const { assert } = require('chai');
-const Wait = require('../utils/wait.util.js');
+const wait = require('../utils/wait.util.js');
 
 describe('Wait Test', () => {
-    const wait = new Wait();
     it('Should wait for true', () => {
         return wait.forTrue(() => true, 5, 1000).then((result) => assert.isTrue(result));
     });

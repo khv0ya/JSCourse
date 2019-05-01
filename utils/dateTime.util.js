@@ -1,3 +1,5 @@
+const millisInDay = 86400000;
+
 class DateTimeUtil {
     today() {
         return new Date();
@@ -10,8 +12,11 @@ class DateTimeUtil {
     }
 
     daysDifference(dateLeft, dateRight) {
-        const millisInDay = 86400000;
-        return Math.floor((dateLeft.getTime() - dateRight.getTime())/millisInDay);
+        return Math.floor((dateLeft.getTime() - dateRight.getTime()) / millisInDay);
+    }
+
+    dateDecreasedByNDays(days) {
+        return new Date(Date.now() - days * millisInDay);
     }
 }
 

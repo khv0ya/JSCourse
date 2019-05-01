@@ -50,4 +50,4 @@ class Wait {
     }
 }
 
-module.exports = Wait;
+module.exports = new Wait();
