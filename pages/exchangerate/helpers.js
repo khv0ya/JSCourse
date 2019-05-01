@@ -26,4 +26,4 @@ class Api {
 
 module.exports = { 
     Api : Api
-}
+};

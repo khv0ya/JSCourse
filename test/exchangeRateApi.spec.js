@@ -1,5 +1,4 @@
 const { describe, it } = require('mocha');
-const { assert } = require('chai');
 const exchangeRateApi = require('../pages/exchangerate/index');
 const dateTimeUtil = require('../utils/dateTime.util.js');
 
@@ -20,7 +19,9 @@ describe('Exchange Rate Api Test', () => {
                 prevRate = entry[currency];
             });
             
+            /* eslint-disable no-console */
             console.log(`I want to see if rate on my currency is growing compare to 10 days before today\n${comparedRates.join('\n')}`);
+            /* eslint-disable no-console */
         });
     });
 }); 
