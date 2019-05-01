@@ -9,7 +9,7 @@ function doWait(action, interval, expectedValue) {
     });
 }
 
-function retrier(action, maxCount, interval, expectedValue) {
+ function retrier(action, maxCount, interval, expectedValue) {
     maxCount--;
     return doWait(action, interval, expectedValue).then(() => { 
         logger.info('Able to reach the expected condition');
@@ -24,13 +24,29 @@ function retrier(action, maxCount, interval, expectedValue) {
     });
 }
 
+async function retrierAwait(action, maxCount, interval, expectedValue) {
+    maxCount--;
+    try {
+        await doWait(action, interval, expectedValue);
+        logger.info('Able to reach the expected condition');
+        return true;
+    } catch(failedWaitResult) {
+        if(maxCount <= 0) {
+            logger.warn(`Not able to reach the expected condition as actual value ${action()} isn't equal to expected value ${expectedValue}`);
+            return false;
+        } else {
+            return retrier(action, maxCount, interval, expectedValue);
+        }
+    }
+}
+
 class Wait {
     forTrue(action, maxCount, interval) {
-        return retrier(action, maxCount, interval, true);
+        return retrierAwait(action, maxCount, interval, true);
     }
 
     forFalse(action, maxCount, interval) {
-        return retrier(action, maxCount, interval, false);
+        return retrierAwait(action, maxCount, interval, false);
     }
 }
 
