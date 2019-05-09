@@ -47,11 +47,13 @@ class Browser {
     }
 
     async findElement(by, name) {
-        try {
-            return await this.driver.findElement(by);
-        } catch(error) {
-            logger.error(`Unable to find element '${name}' : ${error}`);
-        }
+        return this.driver.findElement(by).catch((error) => {
+            logger.warning(`Cannot find element ${error}: ${name}`)
+        });
+    } 
+
+    async findElements(by, name) {
+        return this.driver.findElements(by);
     }
 }
 

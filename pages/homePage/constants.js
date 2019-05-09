@@ -1,7 +1,10 @@
 const { By } = require('selenium-webdriver');
 
 const locators = {
-    searchInput : By.name('q')
+    pageLocator : By.name('q'),
+    elements : {
+        searchInput : By.name('q')
+    }
 }
 
 module.exports = {
