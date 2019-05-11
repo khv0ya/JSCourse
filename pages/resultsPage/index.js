@@ -1,6 +1,5 @@
 const { locators, regexps } = require('./constants');
 const BasePage = require('../../framework/basePage');
-const logger = require('../../utils/log.util');
 
 class ResultsPage extends BasePage {
     constructor(browser) {
@@ -11,16 +10,17 @@ class ResultsPage extends BasePage {
         const resultsCount = await this.browser.findElement(locators.elements.resultsCount);
         const resultsCountText = await resultsCount.getText();
         const resultsCountRegex = regexps.resultsCountRegex;
-        return +resultsCountRegex.exec(resultsCountText).pop().replace(regexps.whiteSpacesRegex, '');
+        return +resultsCountRegex.exec(resultsCountText).pop().replace(regexps.digitsDelimiterRegex, '');
     }
 
     async getResultsLinks() {
-        let linkTexts = [];
-        const links = await this.browser.findElements(locators.elements.resultLinks);
-        await links.forEach(async(element) => {
-            element.getText().then(text => linkTexts.push(text)).catch(error => logger.warn(`${error}`));
-        });
-        return linkTexts;
+        const links = await this.browser.findElements(locators.elements.resultLinks); 
+        let linksTexts = new Array();
+        for (let i = 0; i < links.length; i++) {
+            let text = await links[i].getText();
+            linksTexts.push(text);
+        }
+        return linksTexts;
     }
 }
 

@@ -48,7 +48,7 @@ class Browser {
 
     async findElement(by, name) {
         return this.driver.findElement(by).catch((error) => {
-            logger.warning(`Cannot find element ${error}: ${name}`)
+            logger.warn(`Cannot find element ${error}: ${name}`)
         });
     } 
 

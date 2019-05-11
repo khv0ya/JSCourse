@@ -10,7 +10,7 @@ const locators = {
 
 const regexps = {
     resultsCountRegex : /\s([\d\s.,]+)\s/,
-    whiteSpacesRegex : / /g
+    digitsDelimiterRegex : /[ .,]/g
 }
 
 module.exports = {
