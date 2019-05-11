@@ -10,7 +10,7 @@ class HomePage extends BasePage {
 
     async search(text) {
         const input = await this.browser.findElement(locators.elements.searchInput);
-        logger.info(`Searching for ${text}`)
+        logger.info(`Searching for ${text}`);
         await input.sendKeys(text, Key.RETURN);
     } 
 }

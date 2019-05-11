@@ -9,7 +9,10 @@ class BasePage {
 
     isOpened() {
         logger.info(`Checking if page ${this.name} is opened`);
-        return this.browser.findElement(this.by, `Unique element of page ${this.name}`).then(() => true).catch((error) => false);
+        return this.browser.findElement(this.by, `Unique element of page ${this.name}`).then(() => true).catch((error) => {
+            logger.error(`Unable to find unique element of page ${this.name}: ${error}`);
+            return false;
+        });
     }
 }
 

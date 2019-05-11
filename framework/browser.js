@@ -48,21 +48,22 @@ class Browser {
     }
 
     async findElement(by, name) {
+        let elements = await this.findElements(by, name);
+        return elements[0];
+    } 
+
+    async findElements(by, name) {
+        logger.info(`Searching for element ${name} with locator: ${by}`);
         let elements = new Array();
         await wait.forTrue(() => {
             try {
-                this.findElements(by, name).then(results => elements = results);
+                this.driver.findElements(by).then(results => elements = results);
                 return elements.length > 0;
             } catch (error) {
                 return false;
             }
         }, config.defaultMaxCount, config.defaultInterval);
-        return elements[0];
-    } 
-
-    async findElements(by, name) {
-        logger.info(`Searching for element ${name} with locator: ${by}`)
-        return this.driver.findElements(by);
+        return elements;
     }
 }
 

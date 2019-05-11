@@ -5,8 +5,8 @@ const locators = {
     elements : {
         searchInput : By.name('q')
     }
-}
+};
 
 module.exports = {
     locators
-}
+};
