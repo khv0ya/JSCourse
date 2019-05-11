@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha",
     "test:rates": "mocha ./test/exchangeRateApi.spec.js",
+    "test:google": "mocha ./test/google/search.spec.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -21,7 +22,9 @@
   "homepage": "https://github.com/khv0ya/JSCourse#readme",
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "chromedriver": "^74.0.0",
+    "mocha": "^6.1.4",
+    "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0"
