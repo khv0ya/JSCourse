@@ -1,6 +1,7 @@
 require('chromedriver');
 const { Builder, Capabilities } = require('selenium-webdriver');
 const logger = require('../utils/log.util');
+const wait = require('../utils/wait.util');
 const config = require('../config.json');
 
 function getChromeCapabilities() {
@@ -47,12 +48,20 @@ class Browser {
     }
 
     async findElement(by, name) {
-        return this.driver.findElement(by).catch((error) => {
-            logger.warn(`Cannot find element ${error}: ${name}`)
-        });
+        let elements = new Array();
+        await wait.forTrue(() => {
+            try {
+                this.findElements(by, name).then(results => elements = results);
+                return elements.length > 0;
+            } catch (error) {
+                return false;
+            }
+        }, config.defaultMaxCount, config.defaultInterval);
+        return elements[0];
     } 
 
     async findElements(by, name) {
+        logger.info(`Searching for element ${name} with locator: ${by}`)
         return this.driver.findElements(by);
     }
 }

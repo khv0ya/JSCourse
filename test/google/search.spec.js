@@ -1,4 +1,4 @@
-const { describe, it } = require('mocha');
+const { describe, it, before, after } = require('mocha');
 const Browser = require('../../framework/browser');
 const HomePage = require('../../pages/homePage/index');
 const ResultsPage = require('../../pages/resultsPage/index');

@@ -4,5 +4,7 @@
         "implicit" : 3000,
         "pageLoad" : 30000,
         "script" : 15000    
-    }
+    },
+    "defaultInterval" : 3000,
+    "defaultMaxCount" : 10
 }
