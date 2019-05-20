@@ -22,8 +22,10 @@
   "homepage": "https://github.com/khv0ya/JSCourse#readme",
   "dependencies": {
     "chai": "^4.2.0",
+    "chai-webdriver": "^1.2.0",
     "chromedriver": "^74.0.0",
     "mocha": "^6.1.4",
+    "mocha-allure-reporter": "^1.4.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
