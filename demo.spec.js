@@ -1,33 +1,33 @@
 const { eventFire } = require('./js/sendEvent');
+const { sendKeys } = require('./js/sendKeys');
+const { getText } = require('./js/getText');
+const { isPresentOnPage } = require('./js/isPresentOnPage');
 
 describe('Protractor Demo App', () => {
+  const form = element(by.tagName('form'));
   const username = element(by.id('login'));
   const password = element(by.id('password'));
-  const logIn = element(by.css('.btn-primary'));
-  const logOut = element(by.id('logout'));
+  const logOut = element(by.css('li[id="logout"] a'));
   const pageHeader = element(by.css('.panel-heading h2'));
 
   beforeEach(() => {
-      browser.get('http://localhost:4200');
+      browser.get('http://reportingportal:8080/');
   });
 
   it('should have title', () => {
       expect(browser.getTitle()).toEqual('Reporting Portal');
   });
 
-  fit('Should log in with admin', () => {
-      username.sendKeys('admin');
-      password.sendKeys('123456');
-      //logIn.click();
-      browser.executeScript(eventFire, logIn, 'submit');
-
-      expect(pageHeader.getText()).toEqual('Select Project');
-
+  it('Should log in with admin', () => {
+      browser.executeScript(sendKeys, username, 'admin');
+      browser.executeScript(sendKeys, password, '123456');
+      browser.executeScript(eventFire, form, 'submit');
+      expect(browser.executeScript(getText, pageHeader)).toEqual('Select Project');
   });
 
   it('Should log out', () => {
-      logOut.click();
-
-      expect(username.isPresent()).toBe(true);
+      browser.executeScript(eventFire, logOut, 'click');
+      browser.refresh();
+      expect(browser.executeScript(isPresentOnPage, username)).toBe(true);
   });
 });
