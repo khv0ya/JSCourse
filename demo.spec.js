@@ -1,17 +1,33 @@
-describe('angularjs homepage todo list', function() {
-    it('should add a todo', function() {
-      browser.get('https://angularjs.org');
-  
-      element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-      element(by.css('[value="add"]')).click();
-  
-      var todoList = element.all(by.repeater('todo in todoList.todos'));
-      expect(todoList.count()).toEqual(3);
-      expect(todoList.get(2).getText()).toEqual('write first protractor test');
-  
-      // You wrote your first test, cross it off the list
-      todoList.get(2).element(by.css('input')).click();
-      var completedAmount = element.all(by.css('.done-true'));
-      expect(completedAmount.count()).toEqual(2);
-    });
+const { eventFire } = require('./js/sendEvent');
+
+describe('Protractor Demo App', () => {
+  const username = element(by.id('login'));
+  const password = element(by.id('password'));
+  const logIn = element(by.css('.btn-primary'));
+  const logOut = element(by.id('logout'));
+  const pageHeader = element(by.css('.panel-heading h2'));
+
+  beforeEach(() => {
+      browser.get('http://localhost:4200');
   });
+
+  it('should have title', () => {
+      expect(browser.getTitle()).toEqual('Reporting Portal');
+  });
+
+  fit('Should log in with admin', () => {
+      username.sendKeys('admin');
+      password.sendKeys('123456');
+      //logIn.click();
+      browser.executeScript(eventFire, logIn, 'submit');
+
+      expect(pageHeader.getText()).toEqual('Select Project');
+
+  });
+
+  it('Should log out', () => {
+      logOut.click();
+
+      expect(username.isPresent()).toBe(true);
+  });
+});
